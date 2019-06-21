@@ -1,12 +1,11 @@
 <?php
 // Initialize
-helper('filesystem');
+helper('themes');
+$extension = 'js';
 $settings = service('settings');
-$themes = new \Tatter\Themes\Models\ThemeModel();
 
 // Get the user or default theme
-$themeId = $settings->theme;
-$theme = $themes->find($themeId);
+$theme = theme();
 if (empty($theme))
 	return;
 
@@ -16,15 +15,19 @@ $directory = FCPATH . $theme->path;
 if (! is_dir($directory))
 	return;
 
-// Check theme path (and subdirectories) for JS files
-if ($items = directory_map($directory)):
-	foreach ($items as $item):
-		// make sure the extensions match
-		if (strtolower(pathinfo($item, PATHINFO_EXTENSION)) == 'js'):
-			// use last modified time for version control
-			$version = filemtime($directory . $item);
-			$url = base_url($theme->path . $item) . "?v=" . $version;
-			echo script_tag($url) . PHP_EOL;
-		endif;
-	endforeach;
-endif;
+// Check theme path (and subdirectories) for matching files
+$DirectoryIterator = new RecursiveDirectoryIterator($directory);
+$IteratorIterator = new RecursiveIteratorIterator($DirectoryIterator);
+$RegexIterator = new RegexIterator($IteratorIterator, '/^.+\.' . $extension . '$/i', RecursiveRegexIterator::GET_MATCH);
+
+// Output a tag for each match
+foreach ($RegexIterator as $match):
+	// Use last modified time for version control
+	$file = reset($match);
+	$version = filemtime($file);
+	
+	// Get the web-relative path
+	$path = str_replace(FCPATH, '', $file);
+	$url = base_url($path) . "?v=" . $version;
+	echo script_tag($url) . PHP_EOL;
+endforeach;
