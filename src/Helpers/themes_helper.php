@@ -1,5 +1,17 @@
 <?php
 
+if (! function_exists('theme'))
+{
+	// return a theme object for the current theme
+	function theme()
+	{
+		// get the current theme
+		$themes = new \Tatter\Themes\Models\ThemeModel();
+		$themeId = service('settings')->theme;
+		return $themes->find($themeId);
+	}
+}
+
 if (! function_exists('themes_form'))
 {
 	// generates a form to select a theme
