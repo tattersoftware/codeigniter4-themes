@@ -10,7 +10,7 @@ class ThemesAdd extends BaseCommand
     protected $name        = 'themes:add';
     protected $description = "Adds a new theme to the database.";
     
-	protected $usage     = "themes:add [name] [path] [description]";
+	protected $usage     = "themes:add [name] [path] [description] [dark]";
 	protected $arguments = [
 		'name'        => "The name of the theme (e.g. 'Dark Night')",
 		'path'        => "The path of the theme relative to public/ (e.g. 'themes/dark')",
@@ -37,16 +37,20 @@ class ThemesAdd extends BaseCommand
 			CLI::write('Be sure to add the directory and files before using the theme', 'yellow');
 		endif;
 	
-		// consume or prompt for description
+		// Consume or prompt for description
 		$description = array_shift($params);
 		if (empty($description))
 			$description = CLI::prompt('Description');
+
+		// Consume or prompt for dark status		
+		$dark = CLI::prompt('Dark theme?', ['n','y']);
 		
-		// build the row
+		// Build the row
 		$theme = [
 			'name'        => $name,
 			'path'        => $path,
 			'description' => $description,
+			'dark'        => ($dark=='y'),
 		];
 
 		try

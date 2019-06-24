@@ -16,7 +16,7 @@ class ThemesList extends BaseCommand
 		CLI::write(" AVAILABLE THEMES ", 'white', 'black');
 		
 		// get all themes
-		$rows = $db->table('themes')->select('name, path, description, created_at')
+		$rows = $db->table('themes')->select('name, path, description, dark, created_at')
 			->where('deleted_at IS NULL')
 			->orderBy('name', 'asc')
 			->get()->getResultArray();
@@ -24,7 +24,7 @@ class ThemesList extends BaseCommand
 		if (empty($rows)):
 			CLI::write( CLI::color("No available themes.", 'yellow') );
 		else:
-			$thead = ['Name', 'Path', 'Description', 'Created'];
+			$thead = ['Name', 'Path', 'Description', 'Dark?', 'Created'];
 			CLI::table($rows, $thead);
 		endif;
 	}

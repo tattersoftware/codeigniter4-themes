@@ -10,7 +10,7 @@ class ThemeModel extends Model
 	protected $returnType = 'object';
 	protected $useSoftDeletes = true;
 
-	protected $allowedFields = ['name', 'path', 'description'];
+	protected $allowedFields = ['name', 'path', 'description', 'dark'];
 
 	protected $useTimestamps = true;
 

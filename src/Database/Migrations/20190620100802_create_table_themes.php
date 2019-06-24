@@ -10,6 +10,7 @@ class Migration_create_table_themes extends Migration
 			'name'         => ['type' => 'VARCHAR', 'constraint' => 255],
 			'path'         => ['type' => 'VARCHAR', 'constraint' => 255],
 			'description'  => ['type' => 'TEXT'],
+			'dark'         => ['type' => 'BOOLEAN', 'default' => 0],
 			'created_at'   => ['type' => 'DATETIME', 'null' => true],
 			'updated_at'   => ['type' => 'DATETIME', 'null' => true],
 			'deleted_at'   => ['type' => 'DATETIME', 'null' => true],
