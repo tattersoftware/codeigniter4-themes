@@ -19,8 +19,7 @@ class ThemeSeeder extends \CodeIgniter\Database\Seeder
 				'protected'  => 0,
 				'summary'    => 'Site display theme',
 			];
-			
-			
+
 			$settings->save($row);			
 		endif;
 		
