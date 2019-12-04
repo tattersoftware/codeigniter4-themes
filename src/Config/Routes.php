@@ -1,3 +1,3 @@
 <?php
 
-$routes->post('themes/select', 'Tatter\Themes\Controllers\Themes::select');
+$routes->post('themes/select', '\Tatter\Themes\Controllers\Themes::select');
