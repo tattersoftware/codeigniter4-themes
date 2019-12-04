@@ -25,7 +25,7 @@ class ThemeSeeder extends \CodeIgniter\Database\Seeder
 		
 		// Check for default theme
 		$themes = new ThemeModel();
-		$theme = $themes->find(1);
+		$theme = $themes->first();
 		if (empty($theme)):
 			// No default theme - create one
 			$row = [
