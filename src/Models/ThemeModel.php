@@ -1,6 +1,7 @@
 <?php namespace Tatter\Themes\Models;
 
 use CodeIgniter\Model;
+use Faker\Generator;
 use Tatter\Themes\Entities\Theme;
 
 class ThemeModel extends Model
@@ -24,4 +25,21 @@ class ThemeModel extends Model
 		'name' => 'required|max_length[255]',
 		'path' => 'required|max_length[255]',
 	];
+
+	/**
+	 * Faked data for Fabricator.
+	 *
+	 * @param Generator $faker
+	 *
+	 * @return Theme
+	 */
+	public function fake(Generator &$faker): Theme
+	{
+		return new Theme([
+			'name'        => $faker->catchPhrase,
+			'path'        => 'themes/' . $faker->word,
+			'description' => $faker->sentence,
+			'dark'        => rand(0, 1),
+		]);
+	}
 }

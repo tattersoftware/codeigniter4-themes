@@ -23,7 +23,7 @@
 		"tatter/settings": "^1.0"
 	},
 	"require-dev": {
-		"codeigniter4/codeigniter4": "dev-master",
+		"codeigniter4/codeigniter4": "dev-develop",
 		"tatter/tools": "^1.6"
 	},
 	"autoload": {
