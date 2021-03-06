@@ -7,13 +7,13 @@ class Migration_create_table_themes extends Migration
 	public function up()
 	{
 		$fields = [
-			'name'         => ['type' => 'VARCHAR', 'constraint' => 255],
-			'path'         => ['type' => 'VARCHAR', 'constraint' => 255],
-			'description'  => ['type' => 'TEXT'],
-			'dark'         => ['type' => 'BOOLEAN', 'default' => 0],
-			'created_at'   => ['type' => 'DATETIME', 'null' => true],
-			'updated_at'   => ['type' => 'DATETIME', 'null' => true],
-			'deleted_at'   => ['type' => 'DATETIME', 'null' => true],
+			'name'         => ['type' => 'varchar', 'constraint' => 255],
+			'path'         => ['type' => 'varchar', 'constraint' => 255],
+			'description'  => ['type' => 'text', 'default' => ''],
+			'dark'         => ['type' => 'boolean', 'default' => 0],
+			'created_at'   => ['type' => 'datetime', 'null' => true],
+			'updated_at'   => ['type' => 'datetime', 'null' => true],
+			'deleted_at'   => ['type' => 'datetime', 'null' => true],
 		];
 		
 		$this->forge->addField('id');
