@@ -1,5 +1,6 @@
 {
 	"name": "tatter/themes",
+	"type": "library",
 	"description": "Lightweight theme manager for CodeIgniter 4",
 	"keywords": [
 		"codeigniter",
@@ -18,22 +19,38 @@
 		}
 	],
 	"require": {
-		"php" : "^7.0",
-		"tatter/settings" : "^1.0"
+		"php": "^7.3 || ^8.0",
+		"tatter/settings": "^1.0"
 	},
 	"require-dev": {
-		"codeigniter4/framework": "dev-master"
+		"codeigniter4/codeigniter4": "dev-master",
+		"tatter/tools": "^1.6"
 	},
 	"autoload": {
 		"psr-4": {
 			"Tatter\\Themes\\": "src"
+		},
+		"exclude-from-classmap": [
+			"**/Database/Migrations/**"
+		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\Support\\": "tests/_support"
 		}
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/codeigniter4/CodeIgniter4"
+		}
+	],
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"scripts": {
-		"post-update-cmd": [
-			"composer dump-autoload",
-			"php spark migrate:latest -n all",
-			"php spark db:seed \\Tatter\\Themes\\Database\\Seeds\\ThemeSeeder"
-		]
+		"analyze": "phpstan analyze",
+		"mutate": "infection --threads=2 --skip-initial-tests --coverage=build/phpunit",
+		"style": "phpcbf --standard=./vendor/codeigniter4/codeigniter4-standard/CodeIgniter4 tests/ src/",
+		"test": "phpunit"
 	}
 }
