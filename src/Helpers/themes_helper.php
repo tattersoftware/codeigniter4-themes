@@ -1,54 +1,67 @@
 <?php
 
+use Tatter\Themes\Entities\Theme;
+use Tatter\Themes\Models\ThemeModel;
+
+/**
+ * Themes Helper
+ */
+
 if (! function_exists('theme'))
 {
-	// return a theme object for the current theme
-	function theme()
+	/**
+	 * Returns the current Theme.
+	 *
+	 * @return Theme
+	 */
+	function theme(): Theme
 	{
-		// get the current theme
-		$themes = new \Tatter\Themes\Models\ThemeModel();
-		$themeId = service('settings')->theme;
-		return $themes->find($themeId);
+		return model(ThemeModel::class)->find((int) service('settings')->theme);
 	}
 }
 
 if (! function_exists('themes_form'))
 {
-	// generates a form to select a theme
-	function themes_form($selectClass = ''): string
+	/**
+	 * Generates a form to select a theme.
+	 *
+	 * @param string $class      Optional class to apply to the select field
+	 * @param int|null $selected ID of the current selection
+	 * @param bool $auto         Whether the form should submit on change
+	 *
+	 * @return string
+	 *
+	 * @deprecated Use the View directly
+	 */
+	function themes_form(string $class = '', int $selected = null, bool $auto = false): string
 	{
-		// get the current theme
-		$themes = new \Tatter\Themes\Models\ThemeModel();
-		$themeId = service('settings')->theme;
-		
-		// build the form
-		$buffer  = "<form name='theme-select' action='" . site_url('themes/select') . "' method='post'>" . PHP_EOL;
-		$buffer .= themes_select($selectClass, $themeId, true);
-		$buffer .= "</form>" . PHP_EOL;
-		
-		return $buffer;
+		return view('Tatter\Themes\Views\form', [
+			'class'    => $class,
+			'selected' => $selected,
+			'auto'     => $auto,
+		]);
 	}
 }
 
 if (! function_exists('themes_select'))
 {
-	// generates a select field using the current & available themes
-	function themes_select($class = '', $current = null, $autoSubmit = false): string
+	/**
+	 * Generates a select field using the current & available themes.
+	 *
+	 * @param string $class      Optional class to apply to the element
+	 * @param int|null $selected ID of the current selection
+	 * @param bool $auto         Whether the form should submit on change
+	 *
+	 * @return string
+	 *
+	 * @deprecated Use the View directly
+	 */
+	function themes_select(string $class = '', int $selected = null, bool $auto = false): string
 	{
-		$themes = new \Tatter\Themes\Models\ThemeModel();
-		
-		$buffer = "<select name='theme' class='{$class}'";
-		if ($autoSubmit)
-			$buffer .= " onchange='this.form.submit();'";
-		$buffer .= '>' . PHP_EOL;
-
-		foreach ($themes->findAll() as $theme):
-			$selected = ($theme->id == $current) ? 'selected':'';
-			$buffer .= "<option value='{$theme->id}' {$selected}>{$theme->name}</option>" . PHP_EOL;
-		endforeach;
-		
-		$buffer .= "</select>" . PHP_EOL;
-		
-		return $buffer;
+		return view('Tatter\Themes\Views\select', [
+			'class'    => $class,
+			'selected' => $selected,
+			'auto'     => $auto,
+		]);
 	}
 }

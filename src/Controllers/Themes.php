@@ -1,27 +1,39 @@
 <?php namespace Tatter\Themes\Controllers;
 
 use CodeIgniter\Controller;
+use CodeIgniter\HTTP\RedirectResponse;
 use Tatter\Themes\Models\ThemeModel;
 
 class Themes extends Controller
-{	
-	public function select()
+{
+	/**
+	 * Receives request input with a variable
+	 * named "theme" (the target theme ID) to
+	 * update the user's current theme setting.
+	 *
+	 * @return RedirectResponse
+	 */
+	public function select(): RedirectResponse
 	{
 		// Validate the input
-		$themeId = $this->request->getPost('theme');
-		if (! is_numeric($themeId))
-			return redirect()->back()->withInput()->with('errors', ['Invalid theme selected.']);
+		if (! $themeId = $this->request->getVar('theme'))
+		{
+			return redirect()->back()->withInput()->with('errors', ['No theme selected.']);		
+		}
 
-		// Verify the theme
-		$themes = new ThemeModel();
-		$theme = $themes->find($themeId);
-		if (empty($theme))
-			return redirect()->back()->withInput()->with('errors', ["Could not find theme #{$themeId}."]);
-		
-		// Set the theme
-		service('settings')->theme = $themeId;
-		
-		// Send to home		
-		return redirect()->back()->with('success', "User theme changed to {$theme->name}");
+		if (! is_numeric($themeId))
+		{
+			return redirect()->back()->withInput()->with('errors', ['Invalid theme selected.']);
+		}
+
+		// Look up the theme
+		if (! $theme = model(ThemeModel::class)->find($themeId))
+		{
+			return redirect()->back()->withInput()->with('errors', ['Could not find theme #' . $themeId]);
+		}
+
+		// Update the setting and send back
+		service('settings')->theme = $theme->id;
+		return redirect()->back()->with('success', 'User theme changed to ' . $theme->name);
 	}
 }
