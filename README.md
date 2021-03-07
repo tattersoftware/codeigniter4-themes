@@ -1,6 +1,10 @@
 # Tatter\Themes
 Lightweight theme manager for CodeIgniter 4
 
+[![](https://github.com/tattersoftware/codeigniter4-themes/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/codeigniter4-themes/actions?query=workflow%3A%22PHPUnit)
+[![](https://github.com/tattersoftware/codeigniter4-themes/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/codeigniter4-themes/actions?query=workflow%3A%22PHPStan)
+[![Coverage Status](https://coveralls.io/repos/github/tattersoftware/codeigniter4-themes/badge.svg?branch=develop)](https://coveralls.io/github/tattersoftware/codeigniter4-themes?branch=develop)
+
 ## Quick Start
 
 1. Install with Composer: `> composer require tatter/themes`
