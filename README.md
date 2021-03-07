@@ -26,22 +26,8 @@ Once the files are downloaded and included in the autoload, run any library migr
 to ensure the database is setup correctly:
 * `> php spark migrate -all`
 
-**Pro Tip:** You can add the spark command to your composer.json to ensure your database is
-always current with the latest release:
-```
-{
-	...
-    "scripts": {
-        "post-update-cmd": [
-            "@composer dump-autoload",
-            "php spark migrate -all"
-        ]
-    },
-	...
-```
-
 You will also need to seed the database with a default theme:
-* `> php spark db:seed \\Tatter\\Themes\\Database\\Seeds\\ThemeSeeder`
+* `> php spark db:seed "Tatter\Themes\Database\Seeds\ThemeSeeder"`
 
 ## Usage
 
@@ -68,13 +54,25 @@ head tag for CSS and the footer for JS. E.g.:
 </head>
 ```
 
-The library checks the user's theme setting then scans all files (including subdirectories)
+The library checks the current theme setting then scans all files (including subdirectories)
 for assets of the corresponding type and outputs them in an appropriate tag.
 
-## UI
+## Theme Settings
 
 The library comes with some basic support for allowing users to select a theme. Load the
-helper to access the functions: `helper('themes')`. Then call `themes_form()` for a
-ready-to-use theme dropdown, or `themes_select()` to include the dropdown within your own
-form. These functions can take optional parameters for setting the class and other
-behavior (see [the helper file](src/helpers/themes_helper.php)).
+helper to access the main function: `helper('themes')`. Then use one of the view files:
+* **Tatter\Themes\Views\form** for a ready-to-use theme dropdown.
+* **Tatter\Themes\Views\select** for a dropdown to include within your own form.
+
+These views functions can take optional parameters for setting the class and other behavior:
+* `class` An optional class to apply to the select field
+* `selected` A theme option to preselect (defaults to the user's/current theme)
+* `auto` Whether the form should submit automatically on change (default: true)
+
+For example, to add a Bootstrap-styled form to your user account page:
+```
+<h2>User Settings</h2>
+
+<h3>Theme</h3>
+<?= view('Tatter\Themes\Views\form', ['class' => 'custom-select', 'selected' => theme()->id]) ?>
+```
