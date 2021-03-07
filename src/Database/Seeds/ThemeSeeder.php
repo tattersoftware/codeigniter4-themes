@@ -1,39 +1,38 @@
 <?php namespace Tatter\Themes\Database\Seeds;
 
+use CodeIgniter\Database\Seeder;
 use Tatter\Settings\Models\SettingModel;
 use Tatter\Themes\Models\ThemeModel;
 
-class ThemeSeeder extends \CodeIgniter\Database\Seeder
+class ThemeSeeder extends Seeder
 {
+	/**
+	 * Checks for and creates the setting and default theme.
+	 */
 	public function run()
 	{
 		// Check for theme setting
-		$settings = new SettingModel();
-		$theme = $settings->where('name', 'theme')->first();
-		if (empty($theme)):
+		if (! model(SettingModel::class)->where('name', 'theme')->first())
+		{
 			// No setting - add the template
-			$row = [
+			model(SettingModel::class)->insert([
 				'name'       => 'theme',
 				'scope'      => 'user',
 				'content'    => '1',
 				'protected'  => 0,
 				'summary'    => 'Site display theme',
-			];
-
-			$settings->save($row);			
-		endif;
+			]);			
+		}
 		
 		// Check for default theme
-		$themes = new ThemeModel();
-		$theme = $themes->first();
-		if (empty($theme)):
+		if (! model(ThemeModel::class)->first())
+		{
 			// No default theme - create one
-			$row = [
+			model(ThemeModel::class)->insert([
 				'name'         => 'Default',
 				'path'         => 'themes/default',
 				'description'  => 'Default theme',
-			];
-			$themes->save($row);
-		endif;
+			]);
+		}
 	}
 }

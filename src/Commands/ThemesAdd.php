@@ -3,6 +3,8 @@
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use Tatter\Themes\Models\ThemeModel;
+use RuntimeException;
+use Throwable;
 
 class ThemesAdd extends BaseCommand
 {
@@ -22,46 +24,50 @@ class ThemesAdd extends BaseCommand
 		$themes = new ThemeModel();
 		
 		// Consume or prompt for a theme name
-		$name = array_shift($params);
-		if (empty($name))
+		if (! $name = array_shift($params))
+		{
 			$name = CLI::prompt('Name of the theme', null, 'required');
+		}
 		
 		// Consume or prompt for the path
-		$path = array_shift($params);
-		if (empty($path))
+		if (! $path = array_shift($params))
+		{
 			$path = CLI::prompt('Path to the theme (relative to public/)', null, 'required');
+		}
 		
 		// Verify theme path
-		if (! is_dir(FCPATH . $path)):
+		if (! is_dir(FCPATH . $path))
+		{
 			CLI::write('Warning! Directory not found: ' . FCPATH . $path, 'yellow');
 			CLI::write('Be sure to add the directory and files before using the theme', 'yellow');
-		endif;
+		}
 	
 		// Consume or prompt for description
-		$description = array_shift($params);
-		if (empty($description))
+		if (! $description = array_shift($params))
+		{
 			$description = CLI::prompt('Description');
+		}
 
-		// Consume or prompt for dark status		
-		$dark = CLI::prompt('Dark theme?', ['n','y']);
-		
-		// Build the row
-		$theme = [
+		// Consume or prompt for dark status	
+		if (! $dark = array_shift($params))
+		{
+			$dark = CLI::prompt('Dark theme?', ['n','y']);
+		}
+
+		// Try to create the record
+		$result = model(ThemeModel::class)->save([
 			'name'        => $name,
 			'path'        => $path,
 			'description' => $description,
 			'dark'        => ($dark=='y'),
-		];
+		]);
 
-		try
+		if (! $result)
 		{
-			$themes->save($theme);
+			$this->showError(new RuntimeException(implode(' ', model(ThemeModel::class)->error())));
+			return;
 		}
-		catch (\Exception $e)
-		{
-			$this->showError($e);
-		}
-		
+
 		$this->call('themes:list');
 	}
 }
