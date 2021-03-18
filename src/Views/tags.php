@@ -5,7 +5,7 @@
  *
  * Consolidated code for JS & CSS
  * views. This is a temporary view
- * and will be remvoed in the next
+ * and will be removed in the next
  * major version, do not rely on it.
  *
  * @internal
@@ -42,5 +42,6 @@ foreach ($RegexIterator as $match)
 	// Get the web-relative path
 	$url = base_url(str_replace(FCPATH, '', $file)) . '?v=' . $version;
 
-	echo script_tag($url) . PHP_EOL;
+	echo $extension === 'js' ? script_tag($url) : link_tag($url);
+	echo PHP_EOL;
 }
