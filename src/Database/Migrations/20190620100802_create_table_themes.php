@@ -9,7 +9,7 @@ class Migration_create_table_themes extends Migration
 		$fields = [
 			'name'         => ['type' => 'varchar', 'constraint' => 255],
 			'path'         => ['type' => 'varchar', 'constraint' => 255],
-			'description'  => ['type' => 'text', 'default' => ''],
+			'description'  => ['type' => 'text', 'null' => true],
 			'dark'         => ['type' => 'boolean', 'default' => 0],
 			'created_at'   => ['type' => 'datetime', 'null' => true],
 			'updated_at'   => ['type' => 'datetime', 'null' => true],
