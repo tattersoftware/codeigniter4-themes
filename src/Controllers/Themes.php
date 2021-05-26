@@ -29,11 +29,12 @@ class Themes extends Controller
 		// Look up the theme
 		if (! $theme = model(ThemeModel::class)->find($themeId))
 		{
-			return redirect()->back()->withInput()->with('errors', ['Could not find theme #' . $themeId]);
+			return redirect()->back()->withInput()->with('errors', ['Could not find theme #' . $themeId . '.']);
 		}
 
 		// Update the setting and send back
 		service('settings')->theme = $theme->id;
-		return redirect()->back()->with('success', 'User theme changed to ' . $theme->name);
+
+		return redirect()->back()->with('success', 'User theme changed to ' . $theme->name . '.');
 	}
 }
