@@ -4,7 +4,7 @@ use Tatter\Themes\Entities\Theme;
 use Tatter\Themes\Models\ThemeModel;
 use Tests\Support\ThemesTestCase;
 
-class HelperTest extends ThemesTestCase
+final class HelperTest extends ThemesTestCase
 {
 	public function testThemeReturnsTheme()
 	{
