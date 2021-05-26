@@ -14,13 +14,14 @@ class ThemeSeeder extends Seeder
 		// Check for theme setting
 		if (! model(SettingModel::class)->where('name', 'theme')->first())
 		{
-			// No setting - add the template
+			// No setting - add the template (compatible with Settings v1 & v2)
 			model(SettingModel::class)->insert([
 				'name'       => 'theme',
-				'scope'      => 'user',
-				'content'    => '1',
-				'protected'  => 0,
+				'datatype'   => 'int',
 				'summary'    => 'Site display theme',
+				'content'    => '1',
+				'scope'      => 'user',
+				'protected'  => 0,
 			]);			
 		}
 		
