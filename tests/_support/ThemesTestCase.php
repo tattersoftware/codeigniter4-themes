@@ -11,25 +11,25 @@ use Tatter\Themes\Database\Seeds\ThemeSeeder;
  */
 final class ThemesTestCase extends CIUnitTestCase
 {
-	use DatabaseTestTrait;
+    use DatabaseTestTrait;
 
-	/**
-	 * @var array|string|null
-	 */
-	protected $namespace;
+    /**
+     * @var array|string|null
+     */
+    protected $namespace;
 
-	/**
-	 * @var array|string
-	 */
-	protected $seed = ThemeSeeder::class;
+    /**
+     * @var array|string
+     */
+    protected $seed = ThemeSeeder::class;
 
-	/**
-	 * Initializes the helper.
-	 */
-	public static function setUpBeforeClass(): void
-	{
-		parent::setUpBeforeClass();
+    /**
+     * Initializes the helper.
+     */
+    public static function setUpBeforeClass(): void
+    {
+        parent::setUpBeforeClass();
 
-		helper('themes');
-	}
+        helper('themes');
+    }
 }
