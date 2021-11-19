@@ -1,30 +1,35 @@
-<?php namespace Tests\Support;
+<?php
+
+namespace Tests\Support;
 
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use Tatter\Themes\Database\Seeds\ThemeSeeder;
 
-class ThemesTestCase extends CIUnitTestCase
+/**
+ * @internal
+ */
+abstract class ThemesTestCase extends CIUnitTestCase
 {
-	use DatabaseTestTrait;
+    use DatabaseTestTrait;
 
-	/**
-	 * @var string|array|null
-	 */
-	protected $namespace = null;
+    /**
+     * @var array|string|null
+     */
+    protected $namespace;
 
-	/**
-	 * @var string|array
-	 */
-	protected $seed = ThemeSeeder::class;
+    /**
+     * @var array|string
+     */
+    protected $seed = ThemeSeeder::class;
 
-	/**
-	 * Initializes the helper.
-	 */
-	public static function setUpBeforeClass(): void
-	{
-		parent::setUpBeforeClass();
+    /**
+     * Initializes the helper.
+     */
+    public static function setUpBeforeClass(): void
+    {
+        parent::setUpBeforeClass();
 
-		helper('themes');
-	}
+        helper('themes');
+    }
 }
