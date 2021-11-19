@@ -58,7 +58,7 @@ class ThemesAdd extends BaseCommand
         ]);
 
         if (! $result) {
-            $this->showError(new RuntimeException(implode(' ', model(ThemeModel::class)->error())));
+            $this->showError(new RuntimeException(implode(' ', model(ThemeModel::class)->errors())));
 
             return;
         }

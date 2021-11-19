@@ -2,7 +2,7 @@
 
 namespace Tatter\Themes\Entities;
 
-use CodeIgniter\Entity;
+use CodeIgniter\Entity\Entity;
 
 class Theme extends Entity
 {

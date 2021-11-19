@@ -9,7 +9,7 @@ use Tatter\Themes\Database\Seeds\ThemeSeeder;
 /**
  * @internal
  */
-final class ThemesTestCase extends CIUnitTestCase
+abstract class ThemesTestCase extends CIUnitTestCase
 {
     use DatabaseTestTrait;
 

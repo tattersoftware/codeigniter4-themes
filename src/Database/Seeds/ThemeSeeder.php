@@ -14,9 +14,10 @@ class ThemeSeeder extends Seeder
     public function run()
     {
         // Check for theme setting
-        if (! model(SettingModel::class)->where('name', 'theme')->first()) {
+        $settings = model(SettingModel::class);
+        if (! $settings->where('name', 'theme')->first()) { // @phpstan-ignore-line
             // No setting - add the template (compatible with Settings v1 & v2)
-            model(SettingModel::class)->insert([
+            $settings->insert([
                 'name'      => 'theme',
                 'datatype'  => 'int',
                 'summary'   => 'Site display theme',
@@ -27,9 +28,10 @@ class ThemeSeeder extends Seeder
         }
 
         // Check for default theme
-        if (! model(ThemeModel::class)->first()) {
+        $themes = model(ThemeModel::class);
+        if (! $themes->first()) {
             // No default theme - create one
-            model(ThemeModel::class)->insert([
+            $themes->insert([
                 'name'        => 'Default',
                 'path'        => 'themes/default',
                 'description' => 'Default theme',
