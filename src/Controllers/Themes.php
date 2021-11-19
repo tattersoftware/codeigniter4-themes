@@ -1,4 +1,6 @@
-<?php namespace Tatter\Themes\Controllers;
+<?php
+
+namespace Tatter\Themes\Controllers;
 
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -10,15 +12,13 @@ class Themes extends Controller
 	 * Receives request input with a variable
 	 * named "theme" (the target theme ID) to
 	 * update the user's current theme setting.
-	 *
-	 * @return RedirectResponse
 	 */
 	public function select(): RedirectResponse
 	{
 		// Validate the input
 		if (! $themeId = $this->request->getVar('theme'))
 		{
-			return redirect()->back()->withInput()->with('errors', ['No theme selected.']);		
+			return redirect()->back()->withInput()->with('errors', ['No theme selected.']);
 		}
 
 		if (! is_numeric($themeId))

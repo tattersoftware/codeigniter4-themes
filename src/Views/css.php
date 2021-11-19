@@ -1,3 +1,1 @@
-<?php
-
-echo view('Tatter\Themes\Views\tags', ['extension' => 'css']);
+<?= view('Tatter\Themes\Views\tags', ['extension' => 'css']);

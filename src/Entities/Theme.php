@@ -1,4 +1,6 @@
-<?php namespace Tatter\Themes\Entities;
+<?php
+
+namespace Tatter\Themes\Entities;
 
 use CodeIgniter\Entity;
 
@@ -9,7 +11,6 @@ class Theme extends Entity
 		'updated_at',
 		'deleted_at',
 	];
-
 	protected $casts = [
 		'dark' => 'bool',
 	];

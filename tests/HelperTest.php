@@ -4,6 +4,9 @@ use Tatter\Themes\Entities\Theme;
 use Tatter\Themes\Models\ThemeModel;
 use Tests\Support\ThemesTestCase;
 
+/**
+ * @internal
+ */
 final class HelperTest extends ThemesTestCase
 {
 	public function testThemeReturnsTheme()
@@ -11,7 +14,7 @@ final class HelperTest extends ThemesTestCase
 		$result = theme();
 
 		$this->assertInstanceOf(Theme::class, $result);
-		$this->assertEquals(1, $result->id);
+		$this->assertSame(1, $result->id);
 	}
 
 	public function testThemeUsesSetting()
@@ -24,6 +27,6 @@ final class HelperTest extends ThemesTestCase
 
 		$result = theme();
 
-		$this->assertEquals($theme->id, $result->id);
+		$this->assertSame($theme->id, $result->id);
 	}
 }

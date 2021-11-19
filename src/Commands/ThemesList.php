@@ -1,4 +1,6 @@
-<?php namespace Tatter\Themes\Commands;
+<?php
+
+namespace Tatter\Themes\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
@@ -15,16 +17,14 @@ class ThemesList extends BaseCommand
 
 		// get all themes
 		$rows = db_connect()->table('themes')->select('name, path, description, dark, created_at')
-			->where('deleted_at IS NULL')
-			->orderBy('name', 'asc')
-			->get()->getResultArray();
+		    ->where('deleted_at IS NULL')
+		    ->orderBy('name', 'asc')
+		    ->get()->getResultArray();
 
 		if (empty($rows))
 		{
 			CLI::write('No available themes.', 'yellow');
-		}
-		else
-		{
+		} else {
 			$thead = ['Name', 'Path', 'Description', 'Dark?', 'Created'];
 			CLI::table($rows, $thead);
 		}

@@ -1,4 +1,6 @@
-<?php namespace Tatter\Themes\Models;
+<?php
+
+namespace Tatter\Themes\Models;
 
 use CodeIgniter\Model;
 use Faker\Generator;
@@ -6,21 +8,18 @@ use Tatter\Themes\Entities\Theme;
 
 class ThemeModel extends Model
 {
-	protected $table      = 'themes';
-	protected $primaryKey = 'id';
-	protected $returnType = Theme::class;
-
+	protected $table          = 'themes';
+	protected $primaryKey     = 'id';
+	protected $returnType     = Theme::class;
 	protected $useTimestamps  = true;
 	protected $useSoftDeletes = true;
 	protected $skipValidation = false;
-
-	protected $allowedFields = [
+	protected $allowedFields  = [
 		'name',
 		'path',
 		'description',
-		'dark'
+		'dark',
 	];
-
 	protected $validationRules = [
 		'name' => 'required|max_length[255]',
 		'path' => 'required|max_length[255]',
@@ -28,10 +27,6 @@ class ThemeModel extends Model
 
 	/**
 	 * Faked data for Fabricator.
-	 *
-	 * @param Generator $faker
-	 *
-	 * @return Theme
 	 */
 	public function fake(Generator &$faker): Theme
 	{
@@ -39,7 +34,7 @@ class ThemeModel extends Model
 			'name'        => $faker->catchPhrase,
 			'path'        => 'themes/' . $faker->word,
 			'description' => $faker->sentence,
-			'dark'        => rand(0, 1),
+			'dark'        => mt_rand(0, 1),
 		]);
 	}
 }

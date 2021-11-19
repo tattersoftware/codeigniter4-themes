@@ -4,6 +4,9 @@ use Tatter\Themes\Entities\Theme;
 use Tatter\Themes\Models\ThemeModel;
 use Tests\Support\ThemesTestCase;
 
+/**
+ * @internal
+ */
 final class ViewsTest extends ThemesTestCase
 {
 	public function testSelectHasCurrentTheme()

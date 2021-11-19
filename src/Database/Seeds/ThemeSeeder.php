@@ -1,4 +1,6 @@
-<?php namespace Tatter\Themes\Database\Seeds;
+<?php
+
+namespace Tatter\Themes\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
 use Tatter\Settings\Models\SettingModel;
@@ -16,23 +18,23 @@ class ThemeSeeder extends Seeder
 		{
 			// No setting - add the template (compatible with Settings v1 & v2)
 			model(SettingModel::class)->insert([
-				'name'       => 'theme',
-				'datatype'   => 'int',
-				'summary'    => 'Site display theme',
-				'content'    => '1',
-				'scope'      => 'user',
-				'protected'  => 0,
-			]);			
+				'name'      => 'theme',
+				'datatype'  => 'int',
+				'summary'   => 'Site display theme',
+				'content'   => '1',
+				'scope'     => 'user',
+				'protected' => 0,
+			]);
 		}
-		
+
 		// Check for default theme
 		if (! model(ThemeModel::class)->first())
 		{
 			// No default theme - create one
 			model(ThemeModel::class)->insert([
-				'name'         => 'Default',
-				'path'         => 'themes/default',
-				'description'  => 'Default theme',
+				'name'        => 'Default',
+				'path'        => 'themes/default',
+				'description' => 'Default theme',
 			]);
 		}
 	}
