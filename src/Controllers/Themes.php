@@ -11,27 +11,31 @@ class Themes extends Controller
     /**
      * Receives request input with a variable
      * named "theme" (the target theme ID) to
-     * update the user's current theme setting.
+     * update the user's current theme preference.
      */
     public function select(): RedirectResponse
     {
         // Validate the input
-        if (! $themeId = $this->request->getVar('theme')) {
-            return redirect()->back()->withInput()->with('errors', ['No theme selected.']);
-        }
-
-        if (! is_numeric($themeId)) {
-            return redirect()->back()->withInput()->with('errors', ['Invalid theme selected.']);
+        if (! $name = $this->request->getVar('theme')) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', ['No theme selected.']);
         }
 
         // Look up the theme
-        if (! $theme = model(ThemeModel::class)->find($themeId)) {
-            return redirect()->back()->withInput()->with('errors', ['Could not find theme #' . $themeId . '.']);
+        if (! $theme = model(ThemeModel::class)->where('name', $name)->first()) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', ['Could not find theme: ' . $name . '.']);
         }
 
         // Update the setting and send back
-        service('settings')->theme = $theme->id;
+        preference('theme', $theme->name);
 
-        return redirect()->back()->with('success', 'User theme changed to ' . $theme->name . '.');
+        return redirect()
+            ->back()
+            ->with('success', 'User theme changed to ' . $theme->name . '.');
     }
 }

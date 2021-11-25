@@ -2,12 +2,13 @@
 
 use CodeIgniter\Test\ControllerTestTrait;
 use Tatter\Themes\Controllers\Themes;
-use Tests\Support\ThemesTestCase;
+use Tatter\Themes\Models\ThemeModel;
+use Tests\Support\TestCase;
 
 /**
  * @internal
  */
-final class ControllerTest extends ThemesTestCase
+final class ControllerTest extends TestCase
 {
     use ControllerTestTrait;
 
@@ -38,36 +39,28 @@ final class ControllerTest extends ThemesTestCase
         $result->assertSessionMissing('settings-theme');
     }
 
-    public function testSelectInvalid()
-    {
-        $_REQUEST['theme'] = 'banana';
-
-        $result = $this->execute('select');
-
-        $result->assertRedirect();
-        $result->assertSessionHas('errors', ['Invalid theme selected.']);
-        $result->assertSessionMissing('settings-theme');
-    }
-
     public function testSelectMissing()
     {
-        $_REQUEST['theme'] = '42';
+        $_REQUEST['theme'] = 'foobar';
 
         $result = $this->execute('select');
 
         $result->assertRedirect();
-        $result->assertSessionHas('errors', ['Could not find theme #42.']);
+        $result->assertSessionHas('errors', ['Could not find theme: foobar.']);
         $result->assertSessionMissing('settings-theme');
     }
 
     public function testSelectSuccess()
     {
-        $_REQUEST['theme'] = '1';
+        // Create a new random Theme
+        $theme = fake(ThemeModel::class);
+
+        $_REQUEST['theme'] = $theme->name;
 
         $result = $this->execute('select');
 
         $result->assertRedirect();
-        $result->assertSessionHas('success', 'User theme changed to Default.');
-        $result->assertSessionHas('settings-theme', 1);
+        $result->assertSessionHas('success', 'User theme changed to ' . $theme->name . '.');
+        $result->assertSame($theme->name, preference('theme'));
     }
 }

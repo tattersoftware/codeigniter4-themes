@@ -10,6 +10,7 @@ parameters:
 		- src/Config/Routes.php
 		- src/Views/*
 	ignoreErrors:
+		- '#Call to an undefined method CodeIgniter\\Database\\BaseBuilder::first\(\)#'
 		- '#Cannot access property [\$a-z_]+ on (array|object)#'
 	universalObjectCratesClasses:
 		- CodeIgniter\Entity
@@ -17,6 +18,7 @@ parameters:
 		- Faker\Generator
 	scanDirectories:
 		- vendor/codeigniter4/codeigniter4/system/Helpers
+		- vendor/tatter/preferences/src/Helpers
 	dynamicConstantNames:
 		- APP_NAMESPACE
 		- CI_DEBUG
