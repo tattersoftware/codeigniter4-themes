@@ -4,7 +4,7 @@ Lightweight theme manager for CodeIgniter 4
 [![](https://github.com/tattersoftware/codeigniter4-themes/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/codeigniter4-themes/actions/workflows/test.yml)
 [![](https://github.com/tattersoftware/codeigniter4-themes/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/codeigniter4-themes/actions/workflows/analyze.yml)
 [![](https://github.com/tattersoftware/codeigniter4-themes/workflows/Deptrac/badge.svg)](https://github.com/tattersoftware/codeigniter4-themes/actions/workflows/inspect.yml)
-[![Coverage Status](https://coveralls.io/repos/github/tattersoftware/codeigniter4-themes/badge.svg?branch=develop)](https://coveralls.io/github/organization/name?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/tattersoftware/codeigniter4-themes/badge.svg?branch=develop)](https://coveralls.io/github/tattersoftware/codeigniter4-themes?branch=develop)
 
 ## Quick Start
 
