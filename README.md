@@ -95,7 +95,7 @@ Likewise, you can set the current theme using the corresponding methods (in prio
 
 To assist with methods 1 & 2 this library comes with a tiny module to display a form and
 process user input. You can add the form to an existing page with the Form View:
-```php
+```html
 <div class="form">
 	<?= view('Tatter\Themes\Views\form') ?>
 </div>
@@ -103,7 +103,7 @@ process user input. You can add the form to an existing page with the Form View:
 
 ...or add the preconfigured `<select>` field to an existing form:
 
-```php
+```html
 <form name="user-settings" action="<?= site_url('users/settings') ?>" method="post">
 	Display name:
 	<input type="text" name="name">
