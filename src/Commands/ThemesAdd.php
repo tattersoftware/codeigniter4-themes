@@ -15,13 +15,15 @@ class ThemesAdd extends BaseCommand
     protected $usage       = 'themes:add [name] [path] [description] [dark]';
     protected $arguments   = [
         'name'        => "The name of the theme (e.g. 'Dark Night')",
-        'path'        => "The path of the theme relative to public/ (e.g. 'themes/dark')",
+        'path'        => "The relative path of the theme (e.g. 'themes/dark')",
         'description' => "A brief description of the theme (e.g. 'A stormy theme fitting for night')",
+        'dark'        => 'Whether this theme uses dark colors (y/n)',
     ];
 
     public function run(array $params = [])
     {
         $themes = new ThemeModel();
+        $config = config('Assets');
 
         // Consume or prompt for a theme name
         if (! $name = array_shift($params)) {
@@ -30,12 +32,12 @@ class ThemesAdd extends BaseCommand
 
         // Consume or prompt for the path
         if (! $path = array_shift($params)) {
-            $path = CLI::prompt('Path to the theme (relative to public/)', null, 'required');
+            $path = CLI::prompt('Path to the theme, relative to ' . $config->directory, null, 'required');
         }
 
         // Verify theme path
-        if (! is_dir(FCPATH . $path)) {
-            CLI::write('Warning! Directory not found: ' . FCPATH . $path, 'yellow');
+        if (! is_dir($config->directory . $path)) {
+            CLI::write('Warning! Directory not found: ' . $config->directory . $path, 'yellow');
             CLI::write('Be sure to add the directory and files before using the theme', 'yellow');
         }
 

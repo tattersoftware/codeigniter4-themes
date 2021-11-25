@@ -1,16 +1,17 @@
 # Tatter\Themes
 Lightweight theme manager for CodeIgniter 4
 
-[![](https://github.com/tattersoftware/codeigniter4-themes/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/codeigniter4-themes/actions?query=workflow%3A%22PHPUnit)
-[![](https://github.com/tattersoftware/codeigniter4-themes/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/codeigniter4-themes/actions?query=workflow%3A%22PHPStan)
-[![Coverage Status](https://coveralls.io/repos/github/tattersoftware/codeigniter4-themes/badge.svg?branch=develop)](https://coveralls.io/github/tattersoftware/codeigniter4-themes?branch=develop)
+[![](https://github.com/tattersoftware/codeigniter4-themes/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/codeigniter4-themes/actions/workflows/test.yml)
+[![](https://github.com/tattersoftware/codeigniter4-themes/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/codeigniter4-themes/actions/workflows/analyze.yml)
+[![](https://github.com/tattersoftware/codeigniter4-themes/workflows/Deptrac/badge.svg)](https://github.com/tattersoftware/codeigniter4-themes/actions/workflows/inspect.yml)
+[![Coverage Status](https://coveralls.io/repos/github/tattersoftware/codeigniter4-themes/badge.svg?branch=develop)](https://coveralls.io/github/organization/name?branch=develop)
 
 ## Quick Start
 
 1. Install with Composer: `> composer require tatter/themes`
 2. Update the database: `> php spark migrate -all`
-3. Seed the database: `> php spark db:seed \\Tatter\\Themes\\Database\\Seeds\\ThemeSeeder`
-5. Place theme files in **public/themes/default** 
+3. Seed the database: `> php spark db:seed "Tatter\Themes\Database\Seeds\ThemeSeeder"`
+5. Place theme files in **public/assets/themes/default** 
 5. Add theme files to your page, e.g.: `echo view('\Tatter\Themes\Views\css)`
 
 ## Features
@@ -36,7 +37,7 @@ You will also need to seed the database with a default theme:
 ## Usage
 
 The library comes with two CLI commands, `themes:list` and `themes:add` to help load themes
-into the database. The Settings library handles default theme settings, and allows users
+into the database. The `Preferences` library handles default theme settings and allows users
 to select their own theme. Theme files all go into a directory relative to **public/**, as
 defined by a theme's `path`. E.g.
 
@@ -49,7 +50,7 @@ defined by a theme's `path`. E.g.
 Theme assets are loaded dynamically by outputting the corresponding view, typically in the
 head tag for CSS and the footer for JS. E.g.:
 
-```
+```html
 <head>
 	<meta charset="utf-8">
 	<title>My Site</title>
@@ -74,7 +75,7 @@ These views functions can take optional parameters for setting the class and oth
 * `auto` Whether the form should submit automatically on change (default: true)
 
 For example, to add a Bootstrap-styled form to your user account page:
-```
+```html
 <h2>User Settings</h2>
 
 <h3>Theme</h3>
