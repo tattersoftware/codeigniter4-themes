@@ -31,8 +31,8 @@ final class ThemeBundle extends Bundle
         $bundle = new self();
 
         // Resolve the directory for the active theme
-        $root      = rtrim(config('Assets')->directory, '/ ') . '/';
-        $directory = $root . trim($theme->path, '/ ');
+        $root      = rtrim(Asset::config()->directory, '\\/ ');
+        $directory = $root . DIRECTORY_SEPARATOR . trim($theme->path, '/ ');
 
         // Locate all CSS and JSS files in the them path
         $files = (new FileCollection())
