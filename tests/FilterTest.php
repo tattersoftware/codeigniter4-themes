@@ -13,10 +13,7 @@ final class FilterTest extends TestCase
 {
     use FilterTestTrait;
 
-    /**
-     * @var string
-     */
-    private $body = <<<'EOD'
+    private string $body = <<<'EOD'
         <html>
         <head>
         	<title>Test</title>
@@ -41,11 +38,11 @@ final class FilterTest extends TestCase
             <html>
             <head>
             	<title>Test</title>
-            <link href="http://example.com/assets/themes/default/apple.css" rel="stylesheet" type="text/css" />
+            <link href="https://example.com/assets/themes/default/apple.css" rel="stylesheet" type="text/css" />
             </head>
             <body>
             	<h1>Hello</h1>
-            <script src="http://example.com/assets/themes/default/banana.js" type="text/javascript"></script>
+            <script src="https://example.com/assets/themes/default/banana.js" type="text/javascript"></script>
             </body>
             </html>
             EOD;
@@ -125,6 +122,6 @@ final class FilterTest extends TestCase
         $this->expectExceptionMessage('Unable to locate the theme: Bump');
 
         $caller = $this->getFilterCaller(ThemesFilter::class, 'after');
-        $result = $caller(['Bump']);
+        $caller(['Bump']);
     }
 }

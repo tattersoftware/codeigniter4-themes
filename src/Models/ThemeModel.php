@@ -34,7 +34,7 @@ class ThemeModel extends Model
             'name'        => $faker->catchPhrase,
             'path'        => 'themes/' . $faker->word,
             'description' => $faker->sentence,
-            'dark'        => mt_rand(0, 1),
+            'dark'        => random_int(0, 1),
         ]);
     }
 }

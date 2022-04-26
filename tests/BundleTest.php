@@ -42,7 +42,7 @@ final class BundleTest extends TestCase
         $this->config->useCache = true;
         $this->assertEmpty(cache()->getCacheInfo());
 
-        $result = ThemeBundle::createFromTheme(theme());
+        ThemeBundle::createFromTheme(theme());
 
         $this->assertNotEmpty(cache()->getCacheInfo());
     }

@@ -10,7 +10,8 @@ parameters:
 		- src/Config/Routes.php
 		- src/Views/*
 	ignoreErrors:
-		- '#Call to an undefined static method Config\\Services::[A-Za-z]+\(\)#'
+		- '#Call to an undefined method CodeIgniter\\Database\\BaseBuilder::first\(\)#'
+		- '#Cannot access property \$[A-Za-z]+ on array\|object#'
 	universalObjectCratesClasses:
 		- CodeIgniter\Entity
 		- CodeIgniter\Entity\Entity

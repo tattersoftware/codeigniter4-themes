@@ -82,6 +82,7 @@ class ThemesFilter implements FilterInterface
         $bodyTags = implode(PHP_EOL, $bodyTags);
 
         // Short circuit?
+        // @phpstan-ignore-next-line https://github.com/phpstan/phpstan/issues/7117
         if ($headTags === '' && $bodyTags === '') {
             return null;
         }
@@ -89,11 +90,11 @@ class ThemesFilter implements FilterInterface
         $body = $response->getBody();
 
         // Add any head content right before the closing head tag
-        if ($headTags) {
+        if ($headTags !== '') {
             $body = str_replace('</head>', $headTags . PHP_EOL . '</head>', $body);
         }
         // Add any body content right before the closing body tag
-        if ($bodyTags) {
+        if ($bodyTags !== '') {
             $body = str_replace('</body>', $bodyTags . PHP_EOL . '</body>', $body);
         }
 
