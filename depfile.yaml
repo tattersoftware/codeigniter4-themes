@@ -1,7 +1,7 @@
 paths:
-  - ./src
-  - ./vendor/codeigniter4/codeigniter4/system
-  - ./vendor/tatter
+  - ./src/
+  - ./vendor/codeigniter4/framework/system/
+  - ./vendor/tatter/
 exclude_files:
   - '#.*test.*#i'
 layers:

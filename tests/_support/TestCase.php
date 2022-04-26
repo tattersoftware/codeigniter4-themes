@@ -25,10 +25,7 @@ abstract class TestCase extends CIUnitTestCase
      */
     protected $seed = ThemeSeeder::class;
 
-    /**
-     * @var AssetsConfig
-     */
-    protected $config;
+    protected AssetsConfig $config;
 
     /**
      * Initializes the helpers.
