@@ -1,5 +1,6 @@
 <?php
 
+use Tatter\Themes\Models\ThemeModel;
 use Tatter\Themes\ThemeBundle;
 use Tests\Support\TestCase;
 
@@ -45,5 +46,15 @@ final class BundleTest extends TestCase
         ThemeBundle::createFromTheme(theme());
 
         $this->assertNotEmpty(cache()->getCacheInfo());
+    }
+
+    public function testFailsNoDirectory()
+    {
+        $theme = fake(ThemeModel::class);
+
+        $this->expectException('UnexpectedValueException');
+        $this->expectExceptionMessage('Theme directory does not exist: ');
+
+        ThemeBundle::createFromTheme($theme);
     }
 }

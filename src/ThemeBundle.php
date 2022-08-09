@@ -6,6 +6,7 @@ use CodeIgniter\Files\FileCollection;
 use Tatter\Assets\Asset;
 use Tatter\Assets\Bundle;
 use Tatter\Themes\Entities\Theme;
+use UnexpectedValueException;
 
 /**
  * Theme Assets Bundle
@@ -33,6 +34,10 @@ final class ThemeBundle extends Bundle
         // Resolve the directory for the active theme
         $root      = rtrim(Asset::config()->directory, '\\/ ');
         $directory = $root . DIRECTORY_SEPARATOR . trim($theme->path, '/ ');
+
+        if (! is_dir($directory)) {
+            throw new UnexpectedValueException('Theme directory does not exist: ' . $directory);
+        }
 
         // Locate all CSS and JSS files in the them path
         $files = (new FileCollection())
