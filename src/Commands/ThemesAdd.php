@@ -5,6 +5,7 @@ namespace Tatter\Themes\Commands;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use RuntimeException;
+use Tatter\Assets\Asset;
 use Tatter\Themes\Models\ThemeModel;
 
 class ThemesAdd extends BaseCommand
@@ -22,8 +23,7 @@ class ThemesAdd extends BaseCommand
 
     public function run(array $params = [])
     {
-        $themes = new ThemeModel();
-        $config = config('Assets');
+        $config = Asset::config();
 
         // Consume or prompt for a theme name
         if (! $name = array_shift($params)) {
