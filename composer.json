@@ -1,15 +1,14 @@
 {
     "name": "tatter/themes",
-    "type": "library",
     "description": "Lightweight theme manager for CodeIgniter 4",
+    "license": "MIT",
+    "type": "library",
     "keywords": [
         "codeigniter",
         "codeigniter4",
         "themes",
         "css"
     ],
-    "homepage": "https://github.com/tattersoftware/codeigniter4-themes",
-    "license": "MIT",
     "authors": [
         {
             "name": "Matthew Gatner",
@@ -18,6 +17,7 @@
             "role": "Developer"
         }
     ],
+    "homepage": "https://github.com/tattersoftware/codeigniter4-themes",
     "require": {
         "php": "^7.4 || ^8.0",
         "tatter/assets": "^3.0",
@@ -28,11 +28,8 @@
         "tatter/imposter": "^1.0",
         "tatter/tools": "^2.0"
     },
-    "config": {
-        "allow-plugins": {
-            "phpstan/extension-installer": true
-        }
-    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Tatter\\Themes\\": "src"
@@ -46,17 +43,24 @@
             "Tests\\Support\\": "tests/_support"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
     "scripts": {
-        "analyze": "phpstan analyze",
+        "analyze": [
+            "phpstan analyze",
+            "psalm",
+            "rector process --dry-run"
+        ],
         "ci": [
             "Composer\\Config::disableProcessTimeout",
             "@deduplicate",
             "@analyze",
+            "@composer normalize --dry-run",
             "@test",
             "@inspect",
-            "rector process",
             "@style"
         ],
         "deduplicate": "phpcpd app/ src/",
